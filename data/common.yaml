@@ -1,0 +1,37 @@
+---
+profile_influxdb::config::data_dir: "/var/lib/influxdb/data"
+profile_influxdb::config::data_index_version: "tsi1"
+profile_influxdb::config::data_query_log_enabled: false
+profile_influxdb::config::data_series_id_set_cache_size: 100
+profile_influxdb::config::data_wal_dir: "/var/lib/influxdb/wal"
+profile_influxdb::config::group: "influxdb"
+profile_influxdb::config::host: "%{facts.fqdn}"
+profile_influxdb::config::http_auth_enabled: true
+profile_influxdb::config::http_bind_address: ""
+profile_influxdb::config::http_bind_port: 8086
+profile_influxdb::config::http_https_enabled: true
+profile_influxdb::config::http_https_certificate: "/etc/pki/tls/certs/influxdb_cert"
+profile_influxdb::config::http_https_private_key: "/etc/pki/tls/private/influxdb_key"
+profile_influxdb::config::http_log_enabled: false
+profile_influxdb::config::http_max_body_size: 0
+profile_influxdb::config::logging_level: "warn"
+profile_influxdb::config::meta_dir: "/var/lib/influxdb/meta"
+profile_influxdb::config::monitor_store_interval: "60s"
+profile_influxdb::config::reporting_disabled: true
+profile_influxdb::config::ssl_ca_content: ""
+profile_influxdb::config::ssl_cert_content: ""
+profile_influxdb::config::ssl_key_content: ""
+profile_influxdb::config::tls_ciphers:
+  - "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305"
+  - "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256"
+  - "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+  - "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384"
+  - "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+profile_influxdb::config::tls_min_version: "tls1.2"
+profile_influxdb::config::tls_max_version: "tls1.2"
+profile_influxdb::config::user: "influxdb"
+
+profile_influxdb::firewall::allowed_subnets:
+  "NCSA private": "172.24.0.0/13"
+  "NCSA private old": "10.142.0.0/16"
+  "NCSA public": "141.142.0.0/16"
