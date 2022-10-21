@@ -9,7 +9,7 @@
 * [`profile_influxdb`](#profile_influxdb): Install and configure InfluxDB service
 * [`profile_influxdb::config`](#profile_influxdbconfig): Manage the InfluxDB configuration and files.
 * [`profile_influxdb::firewall`](#profile_influxdbfirewall): Open InfluxDB port in the firewall
-* [`profile_influxdb::service`](#profile_influxdbservice): A short summary of the purpose of this class
+* [`profile_influxdb::service`](#profile_influxdbservice): Install InfluxDB package and manage service
 
 ## Classes
 
@@ -60,9 +60,9 @@ The following parameters are available in the `profile_influxdb::config` class:
 * [`meta_dir`](#meta_dir)
 * [`monitor_store_interval`](#monitor_store_interval)
 * [`reporting_disabled`](#reporting_disabled)
+* [`ssl_ca_content`](#ssl_ca_content)
 * [`ssl_cert_content`](#ssl_cert_content)
 * [`ssl_key_content`](#ssl_key_content)
-* [`ssl_ca_content`](#ssl_ca_content)
 * [`tls_ciphers`](#tls_ciphers)
 * [`tls_max_version`](#tls_max_version)
 * [`tls_min_version`](#tls_min_version)
@@ -118,7 +118,7 @@ Bind address used by the HTTP service.
 
 ##### <a name="http_bind_port"></a>`http_bind_port`
 
-Data type: `String`
+Data type: `Integer`
 
 Bind port used by the HTTP service.
 
@@ -182,6 +182,12 @@ Data type: `Boolean`
 
 Whether to disable reporting of usage data to usage.influxdata.com.
 
+##### <a name="ssl_ca_content"></a>`ssl_ca_content`
+
+Data type: `String`
+
+Content of the SSL CA certificate(s) issued by the CA which signed the certificate.
+
 ##### <a name="ssl_cert_content"></a>`ssl_cert_content`
 
 Data type: `String`
@@ -193,12 +199,6 @@ Content of the SSL certificate to be used by the influxdb service.
 Data type: `String`
 
 Content of the SSL private key used in the CSR for the certificate.
-
-##### <a name="ssl_ca_content"></a>`ssl_ca_content`
-
-Data type: `String`
-
-Content of the SSL CA certificate(s) issued by the CA which signed the certificate.
 
 ##### <a name="tls_ciphers"></a>`tls_ciphers`
 
@@ -250,7 +250,7 @@ Subnets allowed access via InfluxDB ports
 
 ### <a name="profile_influxdbservice"></a>`profile_influxdb::service`
 
-A description of what this class does
+Install InfluxDB package and manage service
 
 #### Examples
 
@@ -259,4 +259,30 @@ A description of what this class does
 ```puppet
 include profile_influxdb::service
 ```
+
+#### Parameters
+
+The following parameters are available in the `profile_influxdb::service` class:
+
+* [`manage_service`](#manage_service)
+* [`required_packages`](#required_packages)
+* [`service_name`](#service_name)
+
+##### <a name="manage_service"></a>`manage_service`
+
+Data type: `Boolean`
+
+Flag of whether to manage InfluxDB service
+
+##### <a name="required_packages"></a>`required_packages`
+
+Data type: `Array[String]`
+
+List of package names to be installed (OS specific).
+
+##### <a name="service_name"></a>`service_name`
+
+Data type: `String`
+
+Name of InfluxDB service
 

@@ -59,14 +59,14 @@
 # @param reporting_disabled
 #   Whether to disable reporting of usage data to usage.influxdata.com.
 #
+# @param ssl_ca_content
+#   Content of the SSL CA certificate(s) issued by the CA which signed the certificate.
+#
 # @param ssl_cert_content
 #   Content of the SSL certificate to be used by the influxdb service.
 #
 # @param ssl_key_content
 #   Content of the SSL private key used in the CSR for the certificate.
-#
-# @param ssl_ca_content
-#   Content of the SSL CA certificate(s) issued by the CA which signed the certificate.
 #
 # @param tls_ciphers
 #   Available set of cipher suites.
@@ -91,7 +91,7 @@ class profile_influxdb::config (
   String        $group,
   Boolean       $http_auth_enabled,
   String        $http_bind_address,
-  String        $http_bind_port,
+  Integer       $http_bind_port,
   Boolean       $http_https_enabled,
   String        $http_https_certificate,
   String        $http_https_private_key,
@@ -102,26 +102,36 @@ class profile_influxdb::config (
   String        $meta_dir,
   String        $monitor_store_interval,
   Boolean       $reporting_disabled,
+  String        $ssl_ca_content,
   String        $ssl_cert_content,
   String        $ssl_key_content,
-  String        $ssl_ca_content,
   Array[String] $tls_ciphers,
   String        $tls_max_version,
   String        $tls_min_version,
   String        $user,
 ) {
 
-  # ENSURE CONFIG FILE
+  # ENSURE FILES
   $file_defaults = {
-    owner  => root,
-    group  => root,
+    owner  => 'root',
+    group  => 'root',
     ensure => file,
     mode   => '0644',
   }
 
+  $managed_by_puppet = '# This file is managed by Puppet - Changes will be overwritten'
+
   file {
     '/etc/influxdb/influxdb.conf':
       content => template('profile_influxdb/influxdb.conf.erb'),
+    ;
+    $http_https_certificate:
+      content => Sensitive( "${managed_by_puppet}\n${ssl_cert_content}\n${ssl_ca_content}" ),
+    ;
+    $http_https_private_key:
+      content => Sensitive( "${managed_by_puppet}\n${ssl_key_content}" ),
+      group   => $group,
+      mode    => '0640',
     ;
     default:
       * => $file_defaults

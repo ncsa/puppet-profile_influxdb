@@ -5,17 +5,17 @@
 # The values in this file override the default values used by the system if
 # a config option is not specified.
 
-reporting-disabled = <%= $profile_influxdb::config::reporting_disabled %>
+reporting-disabled = <%= @reporting_disabled %>
 
 [meta]
-  dir = "<%= $profile_influxdb::config::meta_dir %>"
+  dir = "<%= @meta_dir %>"
 
 [data]
-  dir = "<%= $profile_influxdb::config::data_dir %>"
-  wal-dir = "<%= $profile_influxdb::config::data_wal_dir %>"
-  index-version = "<%= $profile_influxdb::config::data_index_version %>"
-  query-log-enabled = <%= $profile_influxdb::config::data_query_log_enabled %>
-  series-id-set-cache-size = <%= $profile_influxdb::config::data_series_id_set_cache_size %>
+  dir = "<%= @data_dir %>"
+  wal-dir = "<%= @data_wal_dir %>"
+  index-version = "<%= @data_index_version %>"
+  query-log-enabled = <%= @data_query_log_enabled %>
+  series-id-set-cache-size = <%= @data_series_id_set_cache_size %>
 
 [coordinator]
 
@@ -24,19 +24,19 @@ reporting-disabled = <%= $profile_influxdb::config::reporting_disabled %>
 [shard-precreation]
 
 [monitor]
-   store-interval = "<%= $profile_influxdb::config::monitor_store_interval %>"
+   store-interval = "<%= @monitor_store_interval %>"
 
 [http]
-  auth-enabled = <%= $profile_influxdb::config::http_auth_enabled %>
-  bind-address = "<%= $profile_influxdb::config::http_bind_address %>:<%= $profile_influxdb::config::http_bind_port %>"
-  log-enabled = <%= $profile_influxdb::config::http_log_enabled %>
-  https-enabled = <%= $profile_influxdb::config::http_https_enabled %>
-  https-certificate = "<%= $profile_influxdb::config::http_https_certificate %>"
-  https-private-key = "<%= $profile_influxdb::config::http_https_private_key %>"
-  max-body-size = <%= $profile_influxdb::config::http_max_body_size %>
+  auth-enabled = <%= @http_auth_enabled %>
+  bind-address = "<%= @http_bind_address %>:<%= @http_bind_port %>"
+  log-enabled = <%= @http_log_enabled %>
+  https-enabled = <%= @http_https_enabled %>
+  https-certificate = "<%= @http_https_certificate %>"
+  https-private-key = "<%= @http_https_private_key %>"
+  max-body-size = <%= @http_max_body_size %>
 
 [logging]
-  level = "<%= $profile_influxdb::config::logging_level %>"
+  level = "<%= @logging_level %>"
 
 [subscriber]
 
@@ -52,9 +52,9 @@ reporting-disabled = <%= $profile_influxdb::config::reporting_disabled %>
 
 [tls]
   ciphers = [
-<% $profile_influxdb::config::tls_ciphers.each |$cipher| { -%>
-    "<%= $cipher %>"
-<% } -%>
+<%- Array(@tls_ciphers).each do |cipher| -%>
+    "<%= cipher %>",
+<% end -%>
   ]
-  min-version = "<%= $profile_influxdb::config::tls_min_version %>"
-  max-version = "<%= $profile_influxdb::config::tls_max_version %>"
+  min-version = "<%= @tls_min_version %>"
+  max-version = "<%= @tls_max_version %>"
