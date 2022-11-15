@@ -18,9 +18,9 @@ profile_influxdb::config::logging_level: "warn"
 profile_influxdb::config::meta_dir: "/var/lib/influxdb/meta"
 profile_influxdb::config::monitor_store_interval: "60s"
 profile_influxdb::config::reporting_disabled: true
-profile_influxdb::config::ssl_ca_content: ""
-profile_influxdb::config::ssl_cert_content: ""
-profile_influxdb::config::ssl_key_content: ""
+profile_influxdb::config::ssl_ca_content: "need to set in Puppet, prefereably encrypted e.g. eyaml"
+profile_influxdb::config::ssl_cert_content: "need to set in Puppet, prefereably encrypted e.g. eyaml"
+profile_influxdb::config::ssl_key_content: "need to set in Puppet, prefereably encrypted e.g. eyaml"
 profile_influxdb::config::tls_ciphers:
   - "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305"
   - "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256"
@@ -35,3 +35,8 @@ profile_influxdb::firewall::allowed_subnets:
   "NCSA private": "172.24.0.0/13"
   "NCSA private old": "10.142.0.0/16"
   "NCSA public": "141.142.0.0/16"
+
+profile_influxdb::service::manage_service: true
+profile_influxdb::service::required_packages:
+  - "influxdb"
+profile_influxdb::service::service_name: "influxdb"

@@ -17,7 +17,21 @@ To install and configure:
 
 ## Configuration
 
-TBD...
+If leaving `$http_https_enabled` (default), you must supply the SSL certificate, CA, and private key content, e.g.:
+```yaml
+profile_influxdb::config::ssl_ca_content: |
+  -----BEGIN CERTIFICATE-----
+  ...
+  -----END CERTIFICATE-----
+profile_influxdb::config::ssl_cert_content: |
+  -----BEGIN CERTIFICATE-----
+  ...
+  -----END CERTIFICATE-----
+profile_influxdb::config::ssl_key_content: |
+  -----BEGIN PRIVATE KEY-----
+  ...
+  -----END PRIVATE KEY-----
+```
 
 
 ## Dependencies
