@@ -18,9 +18,8 @@ class profile_influxdb::service (
   Array[String] $required_packages,
   String        $service_name,
 ) {
-
   # PACKAGES
-  ensure_packages( $required_packages, {'ensure' => 'present'} )
+  ensure_packages( $required_packages, { 'ensure' => 'present' })
 
   if ( $manage_service ) {
     service { $service_name :
@@ -29,15 +28,14 @@ class profile_influxdb::service (
       hasstatus  => true,
       hasrestart => true,
       require    => [
-        Package[ $required_packages ],
-        File[ '/etc/influxdb/influxdb.conf' ],
+        Package[$required_packages],
+        File['/etc/influxdb/influxdb.conf'],
       ],
       subscribe  => [
-        File[ '/etc/influxdb/influxdb.conf' ],
-        File[ $profile_influxdb::config::http_https_certificate ],
-        File[ $profile_influxdb::config::http_https_private_key ],
-      ]
+        File['/etc/influxdb/influxdb.conf'],
+        File[$profile_influxdb::config::http_https_certificate],
+        File[$profile_influxdb::config::http_https_private_key],
+      ],
     }
   }
-
 }

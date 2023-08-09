@@ -110,7 +110,6 @@ class profile_influxdb::config (
   String        $tls_min_version,
   String        $user,
 ) {
-
   # ENSURE FILES
   $file_defaults = {
     owner  => 'root',
@@ -124,18 +123,18 @@ class profile_influxdb::config (
   file {
     '/etc/influxdb/influxdb.conf':
       content => template('profile_influxdb/influxdb.conf.erb'),
-    ;
+      ;
     $http_https_certificate:
       content => Sensitive( "${managed_by_puppet}\n${ssl_cert_content}\n${ssl_ca_content}" ),
-    ;
+      ;
     $http_https_private_key:
       content => Sensitive( "${managed_by_puppet}\n${ssl_key_content}" ),
       group   => $group,
       mode    => '0640',
-    ;
+      ;
     default:
       * => $file_defaults
-    ;
+      ;
   }
 
   # ENSURE DIRECTORIES
@@ -148,14 +147,13 @@ class profile_influxdb::config (
 
   file {
     $data_dir:
-    ;
+      ;
     $data_wal_dir:
-    ;
+      ;
     $meta_dir:
-    ;
+      ;
     default:
       * => $directory_defaults
-    ;
+      ;
   }
-
 }
