@@ -1,4 +1,9 @@
 ---
+profile_influxdb::backup::locations:
+  - "/etc/influxdb"
+  - "/etc/pki/tls/certs/influxdb_cert"
+  - "/etc/pki/tls/private/influxdb_key"
+  - "/var/lib/influxdb"
 profile_influxdb::config::data_dir: "/var/lib/influxdb/data"
 profile_influxdb::config::data_index_version: "tsi1"
 profile_influxdb::config::data_query_log_enabled: false
