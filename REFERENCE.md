@@ -55,6 +55,7 @@ The following parameters are available in the `profile_influxdb::config` class:
 * [`http_https_private_key`](#http_https_private_key)
 * [`http_log_enabled`](#http_log_enabled)
 * [`http_max_body_size`](#http_max_body_size)
+* [`http_pprof_enabled`](#http_pprof_enabled)
 * [`host`](#host)
 * [`logging_level`](#logging_level)
 * [`meta_dir`](#meta_dir)
@@ -151,6 +152,12 @@ Whether HTTP request logging is enabled.
 Data type: `Integer`
 
 Maximum size of a client request body, in bytes. Setting to 0 disables the limit.
+
+##### <a name="http_pprof_enabled"></a>`http_pprof_enabled`
+
+Data type: `Boolean`
+
+Whether pprof endpoint is enabled (used for troubleshooting and monitoring)
 
 ##### <a name="host"></a>`host`
 

@@ -14,6 +14,7 @@ profile_influxdb::config::http_https_certificate: "/etc/pki/tls/certs/influxdb_c
 profile_influxdb::config::http_https_private_key: "/etc/pki/tls/private/influxdb_key"
 profile_influxdb::config::http_log_enabled: false
 profile_influxdb::config::http_max_body_size: 0
+profile_influxdb::config::http_pprof_enabled: false
 profile_influxdb::config::logging_level: "warn"
 profile_influxdb::config::meta_dir: "/var/lib/influxdb/meta"
 profile_influxdb::config::monitor_store_interval: "60s"
