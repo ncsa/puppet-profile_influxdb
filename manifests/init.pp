@@ -5,9 +5,7 @@
 # @example
 #   include profile_influxdb
 class profile_influxdb {
-
-  include ::profile_influxdb::config
-  include ::profile_influxdb::service
-  include ::profile_influxdb::firewall
-
+  include profile_influxdb::config
+  include profile_influxdb::service
+  include profile_influxdb::firewall
 }

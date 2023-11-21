@@ -44,6 +44,9 @@
 # @param http_max_body_size
 #   Maximum size of a client request body, in bytes. Setting to 0 disables the limit.
 #
+# @param http_pprof_enabled
+#   Whether pprof endpoint is enabled (used for troubleshooting and monitoring)
+#
 # @param host
 #   Hostname of service. Defaults to host's FQDN. Parameter not currently used anywhere.
 #
@@ -97,6 +100,7 @@ class profile_influxdb::config (
   String        $http_https_private_key,
   Boolean       $http_log_enabled,
   Integer       $http_max_body_size,
+  Boolean       $http_pprof_enabled,
   String        $host,
   String        $logging_level,
   String        $meta_dir,
@@ -110,7 +114,6 @@ class profile_influxdb::config (
   String        $tls_min_version,
   String        $user,
 ) {
-
   # ENSURE FILES
   $file_defaults = {
     owner  => 'root',
@@ -124,18 +127,18 @@ class profile_influxdb::config (
   file {
     '/etc/influxdb/influxdb.conf':
       content => template('profile_influxdb/influxdb.conf.erb'),
-    ;
+      ;
     $http_https_certificate:
       content => Sensitive( "${managed_by_puppet}\n${ssl_cert_content}\n${ssl_ca_content}" ),
-    ;
+      ;
     $http_https_private_key:
       content => Sensitive( "${managed_by_puppet}\n${ssl_key_content}" ),
       group   => $group,
       mode    => '0640',
-    ;
+      ;
     default:
       * => $file_defaults
-    ;
+      ;
   }
 
   # ENSURE DIRECTORIES
@@ -148,14 +151,13 @@ class profile_influxdb::config (
 
   file {
     $data_dir:
-    ;
+      ;
     $data_wal_dir:
-    ;
+      ;
     $meta_dir:
-    ;
+      ;
     default:
       * => $directory_defaults
-    ;
+      ;
   }
-
 }
